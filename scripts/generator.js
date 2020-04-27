@@ -1,11 +1,11 @@
 const fs = require("fs-extra");
 const yaml = require("js-yaml");
 
-const safeWorkflow = (filename, workflow) => {
+const json2yaml = (filename, workflow) => {
 	const comment =
-		"# GENERATED CONTENT\n# remove repo from adrianjost/.github/synced-repos.js before editing\n";
+		"# GENERATED CONTENT\n# remove repo from adrianjost/.github/synced/workflows/generator.js before editing\n";
 	fs.writeFileSync(
-		`../../.github/workflows/${filename}.yml`,
+		`../${filename}`,
 		comment + yaml.dump(workflow, { lineWidth: -1 })
 	);
 };
@@ -15,15 +15,13 @@ const clone = (obj) => JSON.parse(JSON.stringify(obj));
 const syncedRepos = [
 	// "actions-surge.sh-teardown",
 	// "Calculator-PWA",
-	// "Curriculum-Vitae",
-	// "dedent-tabs",
-	// "fastfeed",
-	// "feathers-query-stringify",
+	"Curriculum-Vitae",
+	"dedent-tabs",
+	"fastfeed",
 	// "file-inject",
 	// "kurswaehler",
 	// "license-ci-checker",
 	"md2tex",
-	// "OpenGallery",
 	// "PR-Changelog-Generator",
 	// "report-viewer",
 	// "SmartLight-API",
@@ -35,12 +33,12 @@ const syncedRepos = [
 	// "SmartLight-Homepage",
 	// "SmartLight-Hub",
 	// "SmartLight-V0",
-	// "SmartLight-Web-Client",
+	"SmartLight-Web-Client",
 	"two-channel-picker",
 	"vue-filter-ui",
 ];
 
-safeWorkflow("sync", {
+json2yaml(".github/workflows/sync.yml", {
 	name: "Sync",
 	on: {
 		schedule: [
@@ -122,7 +120,7 @@ safeWorkflow("sync", {
 	},
 });
 
-safeWorkflow("synced-pr-automation-auto-assign", {
+json2yaml(".github/workflows/synced-pr-automation-auto-assign.yml", {
 	name: "PR Automation",
 	on: {
 		pull_request: {
@@ -143,7 +141,7 @@ safeWorkflow("synced-pr-automation-auto-assign", {
 	},
 });
 
-safeWorkflow("synced-pr-automation-comment-reaction", {
+json2yaml(".github/workflows/synced-pr-automation-comment-reaction.yml", {
 	name: "PR Automation",
 	on: {
 		issue_comment: {
@@ -178,4 +176,81 @@ safeWorkflow("synced-pr-automation-comment-reaction", {
 			],
 		},
 	},
+});
+
+json2yaml(".mergify.yml", {
+	pull_request_rules: [
+		// ######################
+		// MERGE PRECONDITIONS
+		// ######################
+		{
+			name: "label PRs with conflicts",
+			conditions: ["conflict"],
+			actions: {
+				label: {
+					add: ["has conflicts"],
+				},
+			},
+		},
+		{
+			name: "remove has conflicts label if conflicts got resolved",
+			conditions: ["label~=has conflicts", "-conflict"],
+			actions: {
+				label: {
+					remove: ["has conflicts"],
+				},
+			},
+		},
+		{
+			name: "let @adrianjost recreate dependabot PRs with conflicts",
+			conditions: ["author~=dependabot(-preview)?\\[bot\\]", "conflict"],
+			actions: {
+				comment: {
+					message: "@adrianjost tell dependabot to recreate PR",
+				},
+			},
+		},
+		// ######################
+		// AUTO MERGING
+		// ######################
+		{
+			name: "auto merge passing Dependabot pull requests",
+			conditions: ["author~=dependabot(-preview)?\\[bot\\]"],
+			actions: {
+				merge: {
+					method: "squash",
+					strict: "smart",
+				},
+			},
+		},
+		{
+			name: "auto merge when ready to merge label is set",
+			conditions: ["label=ready to merge"],
+			actions: {
+				merge: {
+					method: "merge",
+					strict: "smart",
+				},
+			},
+		},
+		// ######################
+		// CLEANUP AFTER MERGE
+		// ######################
+		{
+			name: "remove ready to merge when merged",
+			conditions: ["merged", "label=ready to merge"],
+			actions: {
+				label: {
+					remove: ["ready to merge"],
+				},
+			},
+		},
+		{
+			name: "delete merged branches",
+			conditions: ["merged", "label!=WIP"],
+			actions: {
+				delete_head_branch: {},
+			},
+		},
+	],
 });

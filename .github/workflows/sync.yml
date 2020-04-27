@@ -1,5 +1,5 @@
 # GENERATED CONTENT
-# remove repo from adrianjost/.github/synced-repos.js before editing
+# remove repo from adrianjost/.github/synced/workflows/generator.js before editing
 name: Sync
 'on':
   schedule:
@@ -17,7 +17,11 @@ jobs:
           SECRETS: |
             ^SYNCED_
           REPOSITORIES: |-
+            ^adrianjost\/Curriculum-Vitae$
+            ^adrianjost\/dedent-tabs$
+            ^adrianjost\/fastfeed$
             ^adrianjost\/md2tex$
+            ^adrianjost\/SmartLight-Web-Client$
             ^adrianjost\/two-channel-picker$
             ^adrianjost\/vue-filter-ui$
           GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
@@ -29,7 +33,11 @@ jobs:
     strategy:
       matrix:
         repo:
+          - Curriculum-Vitae
+          - dedent-tabs
+          - fastfeed
           - md2tex
+          - SmartLight-Web-Client
           - two-channel-picker
           - vue-filter-ui
     steps:
@@ -48,7 +56,11 @@ jobs:
     strategy:
       matrix:
         repo:
+          - Curriculum-Vitae
+          - dedent-tabs
+          - fastfeed
           - md2tex
+          - SmartLight-Web-Client
           - two-channel-picker
           - vue-filter-ui
     steps:
