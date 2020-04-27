@@ -1,4 +1,4 @@
-name: Sync Credentials
+name: Sync
 on:
   schedule:
     - cron: '0 3 * * *'
