@@ -22,7 +22,7 @@ const syncedRepos = [
 	// "file-inject",
 	// "kurswaehler",
 	// "license-ci-checker",
-	// "md2tex",
+	"md2tex",
 	// "OpenGallery",
 	// "PR-Changelog-Generator",
 	// "report-viewer",
@@ -37,6 +37,7 @@ const syncedRepos = [
 	// "SmartLight-V0",
 	// "SmartLight-Web-Client",
 	"two-channel-picker",
+	"vue-filter-ui",
 ];
 
 safeWorkflow("sync", {
@@ -72,7 +73,7 @@ safeWorkflow("sync", {
 			],
 		},
 		workflows: {
-			name: "Mergify",
+			name: "Workflows",
 			"runs-on": "ubuntu-latest",
 			strategy: {
 				matrix: {
@@ -89,6 +90,8 @@ safeWorkflow("sync", {
 						dst_owner: "adrianjost",
 						dst_repo_name: "${{ matrix.repo }}",
 						file_filter: "synced-*.yml",
+						commit_message:
+							"update synced github actions from adrianjost/.github",
 					},
 				},
 			],
@@ -111,6 +114,7 @@ safeWorkflow("sync", {
 						dst_owner: "adrianjost",
 						dst_repo_name: "${{ matrix.repo }}",
 						file_filter: ".mergify.yml",
+						commit_message: "update .mergify.yml from adrianjost/.github",
 					},
 				},
 			],
