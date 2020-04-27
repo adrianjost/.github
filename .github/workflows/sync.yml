@@ -34,7 +34,7 @@ jobs:
         # List all repo names that should be synced to here
         repo: ["vue-filter-ui"] #, "two-channel-picker"]
     steps:
-      - uses: andstor/copycat-action@master
+      - uses: andstor/copycat-action@v3.2.1
         with:
           personal_token: ${{ secrets.SYNCED_GITHUB_TOKEN }}
           src_path: .github/workflows
