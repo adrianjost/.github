@@ -160,7 +160,7 @@ json2yaml(".github/workflows/synced-pr-automation-comment-reaction.yml", {
 					name: "listen for PR Comments",
 					uses: "machine-learning-apps/actions-chatops@master",
 					with: {
-						TRIGGER_PHRASE: "@adrianjost tell dependabot to recreate PR",
+						TRIGGER_PHRASE: "Someone with write access should tell dependabot to recreate this PR.",
 					},
 					env: {
 						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
@@ -210,7 +210,7 @@ json2yaml(".mergify.yml", {
 			conditions: ["author~=dependabot(-preview)?\\[bot\\]", "conflict"],
 			actions: {
 				comment: {
-					message: "@adrianjost tell dependabot to recreate PR",
+					message: "Someone with write access should tell dependabot to recreate this PR.",
 				},
 			},
 		},
