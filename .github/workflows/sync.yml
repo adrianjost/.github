@@ -28,6 +28,7 @@ jobs:
         env:
           SYNCED_GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
   workflows:
+    needs: secrets
     name: Workflows
     runs-on: ubuntu-latest
     strategy:
@@ -50,7 +51,8 @@ jobs:
           dst_repo_name: '${{ matrix.repo }}'
           file_filter: synced-*.yml
           commit_message: update synced github actions from adrianjost/.github
-  Mergify:
+  mergify:
+    needs: workflows
     name: Mergify
     runs-on: ubuntu-latest
     strategy:

@@ -71,6 +71,7 @@ json2yaml(".github/workflows/sync.yml", {
 			],
 		},
 		workflows: {
+			needs: "secrets",
 			name: "Workflows",
 			"runs-on": "ubuntu-latest",
 			strategy: {
@@ -94,7 +95,8 @@ json2yaml(".github/workflows/sync.yml", {
 				},
 			],
 		},
-		Mergify: {
+		mergify: {
+			needs: "workflows",
 			name: "Mergify",
 			"runs-on": "ubuntu-latest",
 			strategy: {
