@@ -6,11 +6,15 @@ const json2yaml = (filename, workflow) => {
 		"# GENERATED CONTENT\n# remove repo from adrianjost/.github/synced/workflows/generator.js before editing\n";
 	fs.writeFileSync(
 		`../${filename}`,
-		comment + yaml.dump(workflow, { lineWidth: -1 })
+		comment +
+			yaml
+				.dump(workflow, {
+					lineWidth: -1,
+					noRefs: true,
+				})
+				.replace(/(((\*|\?|\d+((\/|\-){0,1}(\d+))*) *){5})/, `'$1'`)
 	);
 };
-
-const clone = (obj) => JSON.parse(JSON.stringify(obj));
 
 const syncedRepos = [
 	// "actions-surge.sh-teardown",
@@ -76,7 +80,7 @@ json2yaml(".github/workflows/sync.yml", {
 			"runs-on": "ubuntu-latest",
 			strategy: {
 				matrix: {
-					repo: clone(syncedRepos),
+					repo: syncedRepos,
 				},
 			},
 			steps: [
