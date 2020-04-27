@@ -1,0 +1,15 @@
+{
+  "name": "global-stuff",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/adrianjost/.github.git",
+  "author": "adrianjost",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^9.0.0",
+    "js-yaml": "^3.13.1"
+  },
+  "scripts": {
+    "start": "node ./generate-sync-workflows.js"
+  }
+}

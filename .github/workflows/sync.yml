@@ -1,44 +1,54 @@
+# GENERATED CONTENT
+# remove repo from adrianjost/.github/synced-repos.js before editing
 name: Sync
-on:
+'on':
   schedule:
-    - cron: "0 3 * * *"
+    - cron: 0 3 * * *
   push:
     branches:
       - master
-
 jobs:
   secrets:
-    name: "Secrets"
+    name: Secrets
     runs-on: ubuntu-latest
     steps:
       - uses: google/secrets-sync-action@v1.1.3
         with:
           SECRETS: |
             ^SYNCED_
-          REPOSITORIES: |
-            ^adrianjost\/vue-filter-ui$
-            ^adrianjost\/two-channel-picker$
-            ^adrianjost\/OpenGallery$
-            ^adrianjost\/Curriculum-Vitae$
-            ^adrianjost\/SmartLight-.*
-          # DRY_RUN: true
-          GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
+          REPOSITORIES: ^adrianjost\/two-channel-picker$
+          GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
         env:
-          # List all secrets to sync here
-          SYNCED_GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
+          SYNCED_GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
   workflows:
-    name: "Workflows"
+    name: Mergify
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # List all repo names that should be synced to here
-        repo: ["vue-filter-ui"] #, "two-channel-picker"]
+        repo:
+          - two-channel-picker
     steps:
       - uses: andstor/copycat-action@v3.2.1
         with:
-          personal_token: ${{ secrets.SYNCED_GITHUB_TOKEN }}
+          personal_token: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
           src_path: .github/workflows
           dst_path: .github/workflows
           dst_owner: adrianjost
-          dst_repo_name: ${{ matrix.repo }}
-          file_filter: "synced-*.yml"
+          dst_repo_name: '${{ matrix.repo }}'
+          file_filter: synced-*.yml
+  Mergify:
+    name: Mergify
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo:
+          - two-channel-picker
+    steps:
+      - uses: andstor/copycat-action@v3.2.1
+        with:
+          personal_token: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
+          src_path: /
+          dst_path: /
+          dst_owner: adrianjost
+          dst_repo_name: '${{ matrix.repo }}'
+          file_filter: .mergify.yml
