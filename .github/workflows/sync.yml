@@ -32,12 +32,13 @@ jobs:
     strategy:
       matrix:
         # List all repo names that should be synced to here
-        repo: ["vue-filter-ui", "two-channel-picker"]
+        repo: ["vue-filter-ui"] #, "two-channel-picker"]
     steps:
       - uses: adrianjost/copycat-action@master
         with:
           personal_token: ${{ secrets.SYNCED_GITHUB_TOKEN }}
           src_path: .github/workflows
+          dst_path: .github/workflows
           dst_owner: adrianjost
           dst_repo_name: ${{ matrix.repo }}
           file_filter: "synced-*.yml"
