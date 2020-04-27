@@ -88,8 +88,7 @@ json2yaml(".github/workflows/sync.yml", {
 					uses: "andstor/copycat-action@v3.2.1",
 					with: {
 						personal_token: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
-						src_path: ".github/workflows",
-						dst_path: ".github/workflows",
+						src_path: ".github/workflows/.",
 						dst_owner: "adrianjost",
 						dst_repo_name: "${{ matrix.repo }}",
 						file_filter: "synced-*.yml",
