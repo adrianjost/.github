@@ -64,12 +64,14 @@ json2yaml(".github/workflows/sync.yml", {
 					uses: "google/secrets-sync-action@v1.1.3",
 					with: {
 						SECRETS: "^SYNCED_\n",
-						REPOSITORIES: syncedRepos.map(name => `^adrianjost\\/${name}$`)
+						REPOSITORIES: syncedRepos
+							.map((name) => `^adrianjost\\/${name}$`)
 							.join("\n"),
 						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
 					},
 					env: {
 						SYNCED_GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
+						SYNCED_TODO_ACTIONS_MONGO_URL: "${{ secrets.SYNCED_TODO_ACTIONS_MONGO_URL }}",
 					},
 				},
 			],
@@ -82,9 +84,13 @@ json2yaml(".github/workflows/sync.yml", {
 					uses: "adrianjost/files-sync-action@master",
 					with: {
 						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
-						FILE_PATTERNS: [`^.github/workflows/synced-*.yml$`, `^.mergify.yml$`].join("\n"),
-						TARGET_REPOS: syncedRepos.map(name => `adrianjost/${name}`)
-						.join("\n")
+						FILE_PATTERNS: [
+							`^.github/workflows/synced-*.yml$`,
+							`^.mergify.yml$`,
+						].join("\n"),
+						TARGET_REPOS: syncedRepos
+							.map((name) => `adrianjost/${name}`)
+							.join("\n"),
 					},
 				},
 			],
@@ -128,7 +134,8 @@ json2yaml(".github/workflows/synced-pr-automation-comment-reaction.yml", {
 					name: "listen for PR Comments",
 					uses: "machine-learning-apps/actions-chatops@master",
 					with: {
-						TRIGGER_PHRASE: "Someone with write access should tell dependabot to recreate this PR.",
+						TRIGGER_PHRASE:
+							"Someone with write access should tell dependabot to recreate this PR.",
 					},
 					env: {
 						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
@@ -143,6 +150,34 @@ json2yaml(".github/workflows/synced-pr-automation-comment-reaction.yml", {
 						token: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
 						"issue-number": "${{ steps.prcomm.outputs.PULL_REQUEST_NUMBER }}",
 						body: "@dependabot recreate",
+					},
+				},
+			],
+		},
+	},
+});
+
+json2yaml(".github/workflows/synced-process-todo-comments.yml", {
+	name: "Process TODO comments",
+	on: {
+		push: {
+			branches: ["master"],
+		},
+	},
+	jobs: {
+		collectTODO: {
+			name: "Collect TODO",
+			"runs-on": "ubuntu-latest",
+			steps: [
+				{
+					uses: "actions/checkout@master",
+				},
+				{
+					name: "Collect TODO",
+					uses: "dtinth/todo-actions@master",
+					env: {
+						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
+						TODO_ACTIONS_MONGO_URL: "${{ secrets.SYNCED_TODO_ACTIONS_MONGO_URL }}",
 					},
 				},
 			],
@@ -178,7 +213,8 @@ json2yaml(".mergify.yml", {
 			conditions: ["author~=dependabot(-preview)?\\[bot\\]", "conflict"],
 			actions: {
 				comment: {
-					message: "Someone with write access should tell dependabot to recreate this PR.",
+					message:
+						"Someone with write access should tell dependabot to recreate this PR.",
 				},
 			},
 		},

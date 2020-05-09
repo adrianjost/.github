@@ -28,6 +28,7 @@ jobs:
           GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
         env:
           SYNCED_GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
+          SYNCED_TODO_ACTIONS_MONGO_URL: '${{ secrets.SYNCED_TODO_ACTIONS_MONGO_URL }}'
   files:
     name: Files
     runs-on: ubuntu-latest
