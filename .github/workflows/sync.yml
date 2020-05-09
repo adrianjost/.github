@@ -3,7 +3,7 @@
 name: Sync
 'on':
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '0 2 * * *'
   push:
     branches:
       - master
@@ -37,8 +37,8 @@ jobs:
         with:
           GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
           FILE_PATTERNS: |-
-            ^.github/workflows/synced-*.yml$
-            ^.mergify.yml$
+            ^\.github\/workflows\/synced-*\.yml$
+            ^\.mergify.yml$
           TARGET_REPOS: |-
             adrianjost/Curriculum-Vitae
             adrianjost/dedent-tabs
