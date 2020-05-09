@@ -48,7 +48,7 @@ json2yaml(".github/workflows/sync.yml", {
 	on: {
 		schedule: [
 			{
-				cron: "0 3 * * *",
+				cron: "0 2 * * *",
 			},
 		],
 		push: {
