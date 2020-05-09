@@ -24,6 +24,7 @@ jobs:
             ^adrianjost\/SmartLight-Web-Client$
             ^adrianjost\/two-channel-picker$
             ^adrianjost\/vue-filter-ui$
+            ^adrianjost\/files-sync-action$
           GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
         env:
           SYNCED_GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
@@ -41,6 +42,7 @@ jobs:
           - SmartLight-Web-Client
           - two-channel-picker
           - vue-filter-ui
+          - files-sync-action
     steps:
       - uses: andstor/copycat-action@v3.2.1
         with:
@@ -64,6 +66,7 @@ jobs:
           - SmartLight-Web-Client
           - two-channel-picker
           - vue-filter-ui
+          - files-sync-action
     steps:
       - uses: andstor/copycat-action@v3.2.1
         with:

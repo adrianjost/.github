@@ -40,6 +40,7 @@ const syncedRepos = [
 	"SmartLight-Web-Client",
 	"two-channel-picker",
 	"vue-filter-ui",
+	"files-sync-action",
 ];
 
 json2yaml(".github/workflows/sync.yml", {
