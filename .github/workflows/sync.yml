@@ -37,8 +37,8 @@ jobs:
         with:
           GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
           FILE_PATTERNS: |-
-            \.github\/workflows\/synced-*\.yml
-            \.mergify.yml
+            ^\.github\/workflows\/synced-.*\.yml$
+            ^\.mergify.yml$
           TARGET_REPOS: |-
             adrianjost/Curriculum-Vitae
             adrianjost/dedent-tabs
