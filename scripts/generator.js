@@ -83,7 +83,7 @@ json2yaml(".github/workflows/sync.yml", {
 					with: {
 						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
 						FILE_PATTERNS: [`^.github/workflows/synced-*.yml$`, `^.mergify.yml$`].join("\n"),
-						TARGET_REPOS: syncedRepos.map(name => `^adrianjost/${name}$`)
+						TARGET_REPOS: syncedRepos.map(name => `adrianjost/${name}`)
 						.join("\n")
 					},
 				},
