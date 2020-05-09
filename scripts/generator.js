@@ -64,8 +64,7 @@ json2yaml(".github/workflows/sync.yml", {
 					uses: "google/secrets-sync-action@v1.1.3",
 					with: {
 						SECRETS: "^SYNCED_\n",
-						REPOSITORIES: syncedRepos
-							.map((name) => `^adrianjost\\/${name}$`)
+						REPOSITORIES: syncedRepos.map(name => `^adrianjost\\/${name}$`)
 							.join("\n"),
 						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
 					},
@@ -75,49 +74,17 @@ json2yaml(".github/workflows/sync.yml", {
 				},
 			],
 		},
-		workflows: {
-			needs: "secrets",
-			name: "Workflows",
+		files: {
+			name: "Files",
 			"runs-on": "ubuntu-latest",
-			strategy: {
-				matrix: {
-					repo: syncedRepos,
-				},
-			},
 			steps: [
 				{
-					uses: "andstor/copycat-action@v3.2.1",
+					uses: "adrianjost/files-sync-action@master",
 					with: {
-						personal_token: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
-						src_path: ".github/workflows/.",
-						dst_owner: "adrianjost",
-						dst_repo_name: "${{ matrix.repo }}",
-						file_filter: "synced-*.yml",
-						commit_message:
-							"update synced github actions from adrianjost/.github",
-					},
-				},
-			],
-		},
-		mergify: {
-			needs: "workflows",
-			name: "Mergify",
-			"runs-on": "ubuntu-latest",
-			strategy: {
-				matrix: {
-					repo: syncedRepos,
-				},
-			},
-			steps: [
-				{
-					uses: "andstor/copycat-action@v3.2.1",
-					with: {
-						personal_token: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
-						src_path: "/.",
-						dst_owner: "adrianjost",
-						dst_repo_name: "${{ matrix.repo }}",
-						file_filter: ".mergify.yml",
-						commit_message: "update .mergify.yml from adrianjost/.github",
+						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
+						FILE_PATTERNS: [`^.github/workflows/synced-*.yml$`, `^.mergify.yml$`].join("\n"),
+						TARGET_REPOS: syncedRepos.map(name => `^adrianjost/${name}$`)
+						.join("\n")
 					},
 				},
 			],

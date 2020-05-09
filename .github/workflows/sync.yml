@@ -28,51 +28,22 @@ jobs:
           GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
         env:
           SYNCED_GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
-  workflows:
-    needs: secrets
-    name: Workflows
+  files:
+    name: Files
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        repo:
-          - Curriculum-Vitae
-          - dedent-tabs
-          - fastfeed
-          - md2tex
-          - SmartLight-Web-Client
-          - two-channel-picker
-          - vue-filter-ui
-          - files-sync-action
     steps:
-      - uses: andstor/copycat-action@v3.2.1
+      - uses: adrianjost/files-sync-action@master
         with:
-          personal_token: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
-          src_path: .github/workflows/.
-          dst_owner: adrianjost
-          dst_repo_name: '${{ matrix.repo }}'
-          file_filter: synced-*.yml
-          commit_message: update synced github actions from adrianjost/.github
-  mergify:
-    needs: workflows
-    name: Mergify
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        repo:
-          - Curriculum-Vitae
-          - dedent-tabs
-          - fastfeed
-          - md2tex
-          - SmartLight-Web-Client
-          - two-channel-picker
-          - vue-filter-ui
-          - files-sync-action
-    steps:
-      - uses: andstor/copycat-action@v3.2.1
-        with:
-          personal_token: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
-          src_path: /.
-          dst_owner: adrianjost
-          dst_repo_name: '${{ matrix.repo }}'
-          file_filter: .mergify.yml
-          commit_message: update .mergify.yml from adrianjost/.github
+          GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
+          FILE_PATTERNS: |-
+            ^.github/workflows/synced-*.yml$
+            ^.mergify.yml$
+          TARGET_REPOS: |-
+            ^adrianjost/Curriculum-Vitae$
+            ^adrianjost/dedent-tabs$
+            ^adrianjost/fastfeed$
+            ^adrianjost/md2tex$
+            ^adrianjost/SmartLight-Web-Client$
+            ^adrianjost/two-channel-picker$
+            ^adrianjost/vue-filter-ui$
+            ^adrianjost/files-sync-action$
