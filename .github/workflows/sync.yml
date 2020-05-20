@@ -17,11 +17,13 @@ jobs:
           SECRETS: |
             ^SYNCED_
           REPOSITORIES: |-
+            ^adrianjost\/Calculator-PWA$
             ^adrianjost\/Curriculum-Vitae$
             ^adrianjost\/dedent-tabs$
             ^adrianjost\/fastfeed$
             ^adrianjost\/md2tex$
             ^adrianjost\/SmartLight-Web-Client$
+            ^adrianjost\/SmartLight-Homepage$
             ^adrianjost\/two-channel-picker$
             ^adrianjost\/vue-filter-ui$
             ^adrianjost\/files-sync-action$
@@ -40,11 +42,13 @@ jobs:
             ^\.github\/workflows\/synced-.*\.yml$
             ^\.mergify.yml$
           TARGET_REPOS: |-
+            adrianjost/Calculator-PWA
             adrianjost/Curriculum-Vitae
             adrianjost/dedent-tabs
             adrianjost/fastfeed
             adrianjost/md2tex
             adrianjost/SmartLight-Web-Client
+            adrianjost/SmartLight-Homepage
             adrianjost/two-channel-picker
             adrianjost/vue-filter-ui
             adrianjost/files-sync-action

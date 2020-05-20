@@ -18,7 +18,7 @@ const json2yaml = (filename, workflow) => {
 
 const syncedRepos = [
 	// "actions-surge.sh-teardown",
-	// "Calculator-PWA",
+	"Calculator-PWA",
 	"Curriculum-Vitae",
 	"dedent-tabs",
 	"fastfeed",
@@ -38,6 +38,7 @@ const syncedRepos = [
 	// "SmartLight-Hub",
 	// "SmartLight-V0",
 	"SmartLight-Web-Client",
+	"SmartLight-Homepage",
 	"two-channel-picker",
 	"vue-filter-ui",
 	"files-sync-action",
@@ -170,7 +171,7 @@ json2yaml(".github/workflows/synced-process-todo-comments.yml", {
 			"runs-on": "ubuntu-latest",
 			steps: [
 				{
-					uses: "actions/checkout@master",
+					uses: "actions/checkout@v2",
 				},
 				{
 					name: "Collect TODO",
