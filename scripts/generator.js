@@ -120,44 +120,6 @@ json2yaml(".github/workflows/synced-pr-automation-auto-assign.yml", {
 	},
 });
 
-json2yaml(".github/workflows/synced-pr-automation-comment-reaction.yml", {
-	name: "PR Automation",
-	on: {
-		issue_comment: {
-			types: ["created"],
-		},
-	},
-	jobs: {
-		"dependabot-recreate": {
-			"runs-on": "ubuntu-latest",
-			steps: [
-				{
-					name: "listen for PR Comments",
-					uses: "machine-learning-apps/actions-chatops@master",
-					with: {
-						TRIGGER_PHRASE:
-							"Someone with write access should tell dependabot to recreate this PR.",
-					},
-					env: {
-						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
-					},
-					id: "prcomm",
-				},
-				{
-					name: "tell dependabot to recreate pr",
-					if: "steps.prcomm.outputs.BOOL_TRIGGERED == 'true'",
-					uses: "peter-evans/create-or-update-comment@v1",
-					with: {
-						token: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
-						"issue-number": "${{ steps.prcomm.outputs.PULL_REQUEST_NUMBER }}",
-						body: "@dependabot recreate",
-					},
-				},
-			],
-		},
-	},
-});
-
 json2yaml(".github/workflows/synced-process-todo-comments.yml", {
 	name: "Process TODO comments",
 	on: {
@@ -206,16 +168,6 @@ json2yaml(".mergify.yml", {
 			actions: {
 				label: {
 					remove: ["has conflicts"],
-				},
-			},
-		},
-		{
-			name: "let @adrianjost recreate dependabot PRs with conflicts",
-			conditions: ["author~=dependabot(-preview)?\\[bot\\]", "conflict"],
-			actions: {
-				comment: {
-					message:
-						"Someone with write access should tell dependabot to recreate this PR.",
 				},
 			},
 		},
