@@ -101,6 +101,9 @@ jobs:
           TARGET_REPOS: |-
             adrianjost/dedent-tabs
             adrianjost/md2tex
+            adrianjost/SmartLight-Web-Client
+            adrianjost/SmartLight-Homepage
+            adrianjost/two-channel-picker
   ci-test:
     name: CI-Test
     runs-on: ubuntu-latest
@@ -111,4 +114,6 @@ jobs:
           COMMIT_MESSAGE: Update Synced CI-Workflow (Test)
           GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
           FILE_PATTERNS: ^\.github\/workflows\/synced-test\.yml$
-          TARGET_REPOS: adrianjost/md2tex
+          TARGET_REPOS: |-
+            adrianjost/md2tex
+            adrianjost/two-channel-picker
