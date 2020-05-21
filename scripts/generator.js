@@ -134,6 +134,9 @@ json2yaml(".github/workflows/synced-process-todo-comments.yml", {
 			steps: [
 				{
 					uses: "actions/checkout@v2",
+					with: {
+						token: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
+					}
 				},
 				{
 					name: "Collect TODO",
