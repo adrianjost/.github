@@ -98,6 +98,4 @@ jobs:
           COMMIT_MESSAGE: Update Synced CI-Workflow (Build)
           GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
           FILE_PATTERNS: ^\.github\/workflows\/synced-build\.yml$
-          TARGET_REPOS: |-
-            adrianjost/Calculator-PWA
-            adrianjost/dedent-tabs
+          TARGET_REPOS: adrianjost/dedent-tabs

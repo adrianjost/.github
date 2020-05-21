@@ -22,7 +22,7 @@ const defaultExluding = (excludes) => defaultSyncs.filter(sync => !excludes.incl
 
 const syncedRepos = {
 	// "actions-surge.sh-teardown",
-	"Calculator-PWA": defaultSyncs,
+	"Calculator-PWA": defaultExluding(["CI-Build"]),
 	"Curriculum-Vitae": defaultExluding(["CI-Lint", "CI-Build"]),
 	"dedent-tabs": defaultSyncs,
 	"fastfeed": defaultExluding(["CI-Lint", "CI-Build"]),
