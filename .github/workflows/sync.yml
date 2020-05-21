@@ -31,16 +31,18 @@ jobs:
         env:
           SYNCED_GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
           SYNCED_TODO_ACTIONS_MONGO_URL: '${{ secrets.SYNCED_TODO_ACTIONS_MONGO_URL }}'
-  files:
-    name: Files
+  github-automation:
+    name: GitHub Automation
     runs-on: ubuntu-latest
+    needs: secrets
     steps:
       - uses: adrianjost/files-sync-action@master
         with:
+          COMMIT_MESSAGE: Update Synced GitHub Automation Workflows
           GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
           FILE_PATTERNS: |-
-            ^\.github\/workflows\/synced-.*\.yml$
-            ^\.mergify.yml$
+            ^\.github\/workflows\/synced-pr-auto-assign\.yml$
+            ^\.github\/workflows\/synced-process-todo-comments\.yml$
           TARGET_REPOS: |-
             adrianjost/Calculator-PWA
             adrianjost/Curriculum-Vitae
@@ -52,3 +54,50 @@ jobs:
             adrianjost/two-channel-picker
             adrianjost/vue-filter-ui
             adrianjost/files-sync-action
+  mergify:
+    name: Mergify
+    runs-on: ubuntu-latest
+    needs: github-automation
+    steps:
+      - uses: adrianjost/files-sync-action@master
+        with:
+          COMMIT_MESSAGE: Update Synced Mergify Config
+          GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
+          FILE_PATTERNS: ^\.mergify.yml$
+          TARGET_REPOS: |-
+            adrianjost/Calculator-PWA
+            adrianjost/Curriculum-Vitae
+            adrianjost/dedent-tabs
+            adrianjost/fastfeed
+            adrianjost/md2tex
+            adrianjost/SmartLight-Web-Client
+            adrianjost/SmartLight-Homepage
+            adrianjost/two-channel-picker
+            adrianjost/vue-filter-ui
+            adrianjost/files-sync-action
+  ci-lint:
+    name: CI-Lint
+    runs-on: ubuntu-latest
+    needs: mergify
+    steps:
+      - uses: adrianjost/files-sync-action@master
+        with:
+          COMMIT_MESSAGE: Update Synced CI-Workflow (Lint)
+          GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
+          FILE_PATTERNS: ^\.github\/workflows\/synced-lint\.yml$
+          TARGET_REPOS: |-
+            adrianjost/Calculator-PWA
+            adrianjost/dedent-tabs
+  ci-build:
+    name: CI-Build
+    runs-on: ubuntu-latest
+    needs: ci-lint
+    steps:
+      - uses: adrianjost/files-sync-action@master
+        with:
+          COMMIT_MESSAGE: Update Synced CI-Workflow (Build)
+          GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
+          FILE_PATTERNS: ^\.github\/workflows\/synced-build\.yml$
+          TARGET_REPOS: |-
+            adrianjost/Calculator-PWA
+            adrianjost/dedent-tabs

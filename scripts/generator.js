@@ -16,16 +16,20 @@ const json2yaml = (filename, workflow) => {
 	);
 };
 
-const syncedRepos = [
+const defaultSyncs = ["Secrets", "Mergify", "GitHub Automation", "CI-Lint", "CI-Build"]
+
+const defaultExluding = (excludes) => defaultSyncs.filter(sync => !excludes.includes(sync))
+
+const syncedRepos = {
 	// "actions-surge.sh-teardown",
-	"Calculator-PWA",
-	"Curriculum-Vitae",
-	"dedent-tabs",
-	"fastfeed",
+	"Calculator-PWA": defaultSyncs,
+	"Curriculum-Vitae": defaultExluding(["CI-Lint", "CI-Build"]),
+	"dedent-tabs": defaultSyncs,
+	"fastfeed": defaultExluding(["CI-Lint", "CI-Build"]),
 	// "file-inject",
 	// "kurswaehler",
 	// "license-ci-checker",
-	"md2tex",
+	"md2tex": defaultExluding(["CI-Lint", "CI-Build"]),
 	// "PR-Changelog-Generator",
 	// "report-viewer",
 	// "SmartLight-API",
@@ -37,12 +41,15 @@ const syncedRepos = [
 	// "SmartLight-Homepage",
 	// "SmartLight-Hub",
 	// "SmartLight-V0",
-	"SmartLight-Web-Client",
-	"SmartLight-Homepage",
-	"two-channel-picker",
-	"vue-filter-ui",
-	"files-sync-action",
-];
+	"SmartLight-Web-Client": defaultExluding(["CI-Lint", "CI-Build"]),
+	"SmartLight-Homepage": defaultExluding(["CI-Lint", "CI-Build"]),
+	"two-channel-picker": defaultExluding(["CI-Lint", "CI-Build"]),
+	"vue-filter-ui": defaultExluding(["CI-Lint", "CI-Build"]),
+	"files-sync-action": defaultExluding(["CI-Lint", "CI-Build"]),
+};
+
+const getReposForSync = (syncName) => Object.keys(syncedRepos).filter(reponame => syncedRepos[reponame].includes(syncName))
+
 
 json2yaml(".github/workflows/sync.yml", {
 	name: "Sync",
@@ -65,7 +72,7 @@ json2yaml(".github/workflows/sync.yml", {
 					uses: "google/secrets-sync-action@v1.1.3",
 					with: {
 						SECRETS: "^SYNCED_\n",
-						REPOSITORIES: syncedRepos
+						REPOSITORIES: getReposForSync("Secrets")
 							.map((name) => `^adrianjost\\/${name}$`)
 							.join("\n"),
 						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
@@ -77,19 +84,81 @@ json2yaml(".github/workflows/sync.yml", {
 				},
 			],
 		},
-		files: {
-			name: "Files",
+		"github-automation": {
+			name: "GitHub Automation",
 			"runs-on": "ubuntu-latest",
+			needs: "secrets",
 			steps: [
 				{
 					uses: "adrianjost/files-sync-action@master",
 					with: {
+						COMMIT_MESSAGE: "Update Synced GitHub Automation Workflows",
 						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
 						FILE_PATTERNS: [
-							`^\\.github\\/workflows\\/synced-.*\\.yml$`,
+							`^\\.github\\/workflows\\/synced-pr-auto-assign\\.yml$`,
+							`^\\.github\\/workflows\\/synced-process-todo-comments\\.yml$`,
+						].join("\n"),
+						TARGET_REPOS: getReposForSync("GitHub Automation")
+							.map((name) => `adrianjost/${name}`)
+							.join("\n"),
+					},
+				},
+			],
+		},
+		mergify: {
+			name: "Mergify",
+			"runs-on": "ubuntu-latest",
+			needs: "github-automation",
+			steps: [
+				{
+					uses: "adrianjost/files-sync-action@master",
+					with: {
+						COMMIT_MESSAGE: "Update Synced Mergify Config",
+						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
+						FILE_PATTERNS: [
 							`^\\.mergify.yml$`,
 						].join("\n"),
-						TARGET_REPOS: syncedRepos
+						TARGET_REPOS: getReposForSync("Mergify")
+							.map((name) => `adrianjost/${name}`)
+							.join("\n"),
+					},
+				},
+			],
+		},
+		"ci-lint": {
+			name: "CI-Lint",
+			"runs-on": "ubuntu-latest",
+			needs: "mergify",
+			steps: [
+				{
+					uses: "adrianjost/files-sync-action@master",
+					with: {
+						COMMIT_MESSAGE: "Update Synced CI-Workflow (Lint)",
+						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
+						FILE_PATTERNS: [
+							`^\\.github\\/workflows\\/synced-lint\\.yml$`,
+						].join("\n"),
+						TARGET_REPOS: getReposForSync("CI-Lint")
+							.map((name) => `adrianjost/${name}`)
+							.join("\n"),
+					},
+				},
+			],
+		},
+		"ci-build": {
+			name: "CI-Build",
+			"runs-on": "ubuntu-latest",
+			needs: "ci-lint",
+			steps: [
+				{
+					uses: "adrianjost/files-sync-action@master",
+					with: {
+						COMMIT_MESSAGE: "Update Synced CI-Workflow (Build)",
+						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
+						FILE_PATTERNS: [
+							`^\\.github\\/workflows\\/synced-build\\.yml$`,
+						].join("\n"),
+						TARGET_REPOS: getReposForSync("CI-Build")
 							.map((name) => `adrianjost/${name}`)
 							.join("\n"),
 					},
@@ -99,7 +168,7 @@ json2yaml(".github/workflows/sync.yml", {
 	},
 });
 
-json2yaml(".github/workflows/synced-pr-automation-auto-assign.yml", {
+json2yaml(".github/workflows/synced-pr-auto-assign.yml", {
 	name: "PR Automation",
 	on: {
 		pull_request: {
@@ -218,3 +287,51 @@ json2yaml(".mergify.yml", {
 		},
 	],
 });
+
+json2yaml(".github/workflows/synced-lint.yml", {
+	name: "CI",
+	on: "push",
+	jobs: {
+		lint: {
+			name: "Lint",
+			"runs-on": "ubuntu-latest",
+			steps: [
+				{
+					uses: "actions/checkout@v2",
+				},
+				{
+					name: "Install dependencies",
+					run: "npm ci"
+				},
+				{
+					name: "Check for Lint Issues",
+					run: "npm run lint:ci"
+				},
+			],
+		},
+	},
+})
+
+json2yaml(".github/workflows/synced-build.yml", {
+	name: "CI",
+	on: "push",
+	jobs: {
+		build: {
+			name: "Build",
+			"runs-on": "ubuntu-latest",
+			steps: [
+				{
+					uses: "actions/checkout@v2",
+				},
+				{
+					name: "Install dependencies",
+					run: "npm ci"
+				},
+				{
+					name: "Build Project",
+					run: "npm run build"
+				},
+			],
+		},
+	},
+})
