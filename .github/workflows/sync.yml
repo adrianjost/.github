@@ -98,4 +98,17 @@ jobs:
           COMMIT_MESSAGE: Update Synced CI-Workflow (Build)
           GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
           FILE_PATTERNS: ^\.github\/workflows\/synced-build\.yml$
-          TARGET_REPOS: adrianjost/dedent-tabs
+          TARGET_REPOS: |-
+            adrianjost/dedent-tabs
+            adrianjost/md2tex
+  ci-test:
+    name: CI-Test
+    runs-on: ubuntu-latest
+    needs: ci-build
+    steps:
+      - uses: adrianjost/files-sync-action@master
+        with:
+          COMMIT_MESSAGE: Update Synced CI-Workflow (Test)
+          GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
+          FILE_PATTERNS: ^\.github\/workflows\/synced-test\.yml$
+          TARGET_REPOS: adrianjost/md2tex

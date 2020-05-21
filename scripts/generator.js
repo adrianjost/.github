@@ -29,7 +29,7 @@ const syncedRepos = {
 	// "file-inject",
 	// "kurswaehler",
 	// "license-ci-checker",
-	"md2tex": defaultExluding(["CI-Lint", "CI-Build"]),
+	"md2tex": [...defaultExluding(["CI-Lint"]), "CI-Test"],
 	// "PR-Changelog-Generator",
 	// "report-viewer",
 	// "SmartLight-API",
@@ -159,6 +159,26 @@ json2yaml(".github/workflows/sync.yml", {
 							`^\\.github\\/workflows\\/synced-build\\.yml$`,
 						].join("\n"),
 						TARGET_REPOS: getReposForSync("CI-Build")
+							.map((name) => `adrianjost/${name}`)
+							.join("\n"),
+					},
+				},
+			],
+		},
+		"ci-test": {
+			name: "CI-Test",
+			"runs-on": "ubuntu-latest",
+			needs: "ci-build",
+			steps: [
+				{
+					uses: "adrianjost/files-sync-action@master",
+					with: {
+						COMMIT_MESSAGE: "Update Synced CI-Workflow (Test)",
+						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
+						FILE_PATTERNS: [
+							`^\\.github\\/workflows\\/synced-test\\.yml$`,
+						].join("\n"),
+						TARGET_REPOS: getReposForSync("CI-Test")
 							.map((name) => `adrianjost/${name}`)
 							.join("\n"),
 					},
@@ -330,6 +350,30 @@ json2yaml(".github/workflows/synced-build.yml", {
 				{
 					name: "Build Project",
 					run: "npm run build"
+				},
+			],
+		},
+	},
+})
+
+json2yaml(".github/workflows/synced-test.yml", {
+	name: "CI",
+	on: "push",
+	jobs: {
+		test: {
+			name: "Test",
+			"runs-on": "ubuntu-latest",
+			steps: [
+				{
+					uses: "actions/checkout@v2",
+				},
+				{
+					name: "Install dependencies",
+					run: "npm ci"
+				},
+				{
+					name: "Execute Testsuite",
+					run: "npm run test"
 				},
 			],
 		},
