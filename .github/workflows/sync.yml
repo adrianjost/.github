@@ -43,6 +43,7 @@ jobs:
           GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
           FILE_PATTERNS: |-
             ^\.github\/workflows\/synced-pr-auto-assign\.yml$
+            ^\.github\/workflows\/synced-dependabot-pr-recreate\.yml$
             ^\.github\/workflows\/synced-process-todo-comments\.yml$
           TARGET_REPOS: |-
             adrianjost/Calculator-PWA
