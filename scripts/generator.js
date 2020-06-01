@@ -46,6 +46,7 @@ const syncedRepos = {
 	"two-channel-picker": [...defaultSyncs, "CI-Test"],
 	"vue-filter-ui": defaultExluding(["CI-Lint", "CI-Build"]),
 	"files-sync-action": defaultExluding(["CI-Lint", "CI-Build"]),
+	"actions-surge.sh-teardown": defaultExluding(["CI-Lint"]),
 };
 
 const getReposForSync = (syncName) => Object.keys(syncedRepos).filter(reponame => syncedRepos[reponame].includes(syncName))
