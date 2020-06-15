@@ -322,7 +322,7 @@ json2yaml(".mergify.yml", {
 			actions: {
 				merge: {
 					method: "squash",
-					strict: "smart",
+					strict: "smart+fasttrack",
 				},
 			},
 		},
@@ -332,7 +332,7 @@ json2yaml(".mergify.yml", {
 			actions: {
 				merge: {
 					method: "merge",
-					strict: "smart",
+					strict: "smart+fasttrack",
 				},
 			},
 		},
