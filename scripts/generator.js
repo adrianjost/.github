@@ -33,7 +33,7 @@ const syncedRepos = {
 	// "PR-Changelog-Generator",
 	// "report-viewer",
 	// "SmartLight-API",
-	// "SmartLight-Database-Functions",
+	"SmartLight-Database-Functions": defaultExluding(["CI-Lint", "CI-Build"]),
 	// "SmartLight-Documentation",
 	// "SmartLight-Firmware",
 	// "SmartLight-Google-Home",

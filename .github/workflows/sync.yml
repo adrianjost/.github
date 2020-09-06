@@ -22,6 +22,7 @@ jobs:
             ^adrianjost\/dedent-tabs$
             ^adrianjost\/fastfeed$
             ^adrianjost\/md2tex$
+            ^adrianjost\/SmartLight-Database-Functions$
             ^adrianjost\/SmartLight-Web-Client$
             ^adrianjost\/SmartLight-Homepage$
             ^adrianjost\/two-channel-picker$
@@ -51,6 +52,7 @@ jobs:
             adrianjost/dedent-tabs
             adrianjost/fastfeed
             adrianjost/md2tex
+            adrianjost/SmartLight-Database-Functions
             adrianjost/SmartLight-Web-Client
             adrianjost/SmartLight-Homepage
             adrianjost/two-channel-picker
@@ -73,6 +75,7 @@ jobs:
             adrianjost/dedent-tabs
             adrianjost/fastfeed
             adrianjost/md2tex
+            adrianjost/SmartLight-Database-Functions
             adrianjost/SmartLight-Web-Client
             adrianjost/SmartLight-Homepage
             adrianjost/two-channel-picker
