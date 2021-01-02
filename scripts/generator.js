@@ -96,13 +96,15 @@ json2yaml(".github/workflows/sync.yml", {
 						COMMIT_MESSAGE: "Update Synced GitHub Automation Workflows",
 						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
 						FILE_PATTERNS: [
-							`^\\.github\\/workflows\\/synced-pr-auto-assign\\.yml$`,
-							`^\\.github\\/workflows\\/synced-dependabot-pr-recreate\\.yml$`,
-							`^\\.github\\/workflows\\/synced-process-todo-comments\\.yml$`,
+							`^synced-pr-auto-assign\\.yml$`,
+							`^synced-dependabot-pr-recreate\\.yml$`,
+							`^synced-process-todo-comments\\.yml$`,
 						].join("\n"),
+						SRC_ROOT: "/synced-workflows/",
 						TARGET_REPOS: getReposForSync("GitHub Automation")
-							.map((name) => `adrianjost/${name}`)
-							.join("\n"),
+						.map((name) => `adrianjost/${name}`)
+						.join("\n"),
+						TARGET_ROOT: "/.github/workflows/",
 					},
 				},
 			],
@@ -138,11 +140,13 @@ json2yaml(".github/workflows/sync.yml", {
 						COMMIT_MESSAGE: "Update Synced CI-Workflow (Lint)",
 						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
 						FILE_PATTERNS: [
-							`^\\.github\\/workflows\\/synced-lint\\.yml$`,
+							`^synced-lint\\.yml$`,
 						].join("\n"),
+						SRC_ROOT: "/synced-workflows/",
 						TARGET_REPOS: getReposForSync("CI-Lint")
-							.map((name) => `adrianjost/${name}`)
-							.join("\n"),
+						.map((name) => `adrianjost/${name}`)
+						.join("\n"),
+						TARGET_ROOT: "/.github/workflows/",
 					},
 				},
 			],
@@ -158,11 +162,13 @@ json2yaml(".github/workflows/sync.yml", {
 						COMMIT_MESSAGE: "Update Synced CI-Workflow (Build)",
 						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
 						FILE_PATTERNS: [
-							`^\\.github\\/workflows\\/synced-build\\.yml$`,
+							`^synced-build\\.yml$`,
 						].join("\n"),
+						SRC_ROOT: "/synced-workflows/",
 						TARGET_REPOS: getReposForSync("CI-Build")
-							.map((name) => `adrianjost/${name}`)
-							.join("\n"),
+						.map((name) => `adrianjost/${name}`)
+						.join("\n"),
+						TARGET_ROOT: "/.github/workflows/",
 					},
 				},
 			],
@@ -178,11 +184,13 @@ json2yaml(".github/workflows/sync.yml", {
 						COMMIT_MESSAGE: "Update Synced CI-Workflow (Test)",
 						GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
 						FILE_PATTERNS: [
-							`^\\.github\\/workflows\\/synced-test\\.yml$`,
+							`^synced-test\\.yml$`,
 						].join("\n"),
+						SRC_ROOT: "/synced-workflows/",
 						TARGET_REPOS: getReposForSync("CI-Test")
-							.map((name) => `adrianjost/${name}`)
-							.join("\n"),
+						.map((name) => `adrianjost/${name}`)
+						.join("\n"),
+						TARGET_ROOT: "/.github/workflows/",
 					},
 				},
 			],
@@ -190,7 +198,7 @@ json2yaml(".github/workflows/sync.yml", {
 	},
 });
 
-json2yaml(".github/workflows/synced-pr-auto-assign.yml", {
+json2yaml("synced-workflows/synced-pr-auto-assign.yml", {
 	name: "PR Automation",
 	on: {
 		pull_request: {
@@ -211,7 +219,7 @@ json2yaml(".github/workflows/synced-pr-auto-assign.yml", {
 	},
 });
 
-json2yaml(".github/workflows/synced-process-todo-comments.yml", {
+json2yaml("synced-workflows/synced-process-todo-comments.yml", {
 	name: "Process TODO comments",
 	on: {
 		push: {
@@ -242,7 +250,7 @@ json2yaml(".github/workflows/synced-process-todo-comments.yml", {
 	},
 });
 
-json2yaml(".github/workflows/synced-dependabot-pr-recreate.yml", {
+json2yaml("synced-workflows/synced-dependabot-pr-recreate.yml", {
 	name: "PR Automation",
 	on: {
 		issue_comment: {
@@ -358,7 +366,7 @@ json2yaml(".mergify.yml", {
 	],
 });
 
-json2yaml(".github/workflows/synced-lint.yml", {
+json2yaml("synced-workflows/synced-lint.yml", {
 	name: "CI",
 	on: "push",
 	jobs: {
@@ -382,7 +390,7 @@ json2yaml(".github/workflows/synced-lint.yml", {
 	},
 })
 
-json2yaml(".github/workflows/synced-build.yml", {
+json2yaml("synced-workflows/synced-build.yml", {
 	name: "CI",
 	on: "push",
 	jobs: {
@@ -406,7 +414,7 @@ json2yaml(".github/workflows/synced-build.yml", {
 	},
 })
 
-json2yaml(".github/workflows/synced-test.yml", {
+json2yaml("synced-workflows/synced-test.yml", {
 	name: "CI",
 	on: "push",
 	jobs: {

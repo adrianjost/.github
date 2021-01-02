@@ -44,9 +44,10 @@ jobs:
           COMMIT_MESSAGE: Update Synced GitHub Automation Workflows
           GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
           FILE_PATTERNS: |-
-            ^\.github\/workflows\/synced-pr-auto-assign\.yml$
-            ^\.github\/workflows\/synced-dependabot-pr-recreate\.yml$
-            ^\.github\/workflows\/synced-process-todo-comments\.yml$
+            ^synced-pr-auto-assign\.yml$
+            ^synced-dependabot-pr-recreate\.yml$
+            ^synced-process-todo-comments\.yml$
+          SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
             adrianjost/Calculator-PWA
             adrianjost/Curriculum-Vitae
@@ -61,6 +62,7 @@ jobs:
             adrianjost/vue-filter-ui
             adrianjost/files-sync-action
             adrianjost/actions-surge.sh-teardown
+          TARGET_ROOT: /.github/workflows/
   mergify:
     name: Mergify
     runs-on: ubuntu-latest
@@ -93,11 +95,13 @@ jobs:
         with:
           COMMIT_MESSAGE: Update Synced CI-Workflow (Lint)
           GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
-          FILE_PATTERNS: ^\.github\/workflows\/synced-lint\.yml$
+          FILE_PATTERNS: ^synced-lint\.yml$
+          SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
             adrianjost/Calculator-PWA
             adrianjost/dedent-tabs
             adrianjost/two-channel-picker
+          TARGET_ROOT: /.github/workflows/
   ci-build:
     name: CI-Build
     runs-on: ubuntu-latest
@@ -107,7 +111,8 @@ jobs:
         with:
           COMMIT_MESSAGE: Update Synced CI-Workflow (Build)
           GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
-          FILE_PATTERNS: ^\.github\/workflows\/synced-build\.yml$
+          FILE_PATTERNS: ^synced-build\.yml$
+          SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
             adrianjost/dedent-tabs
             adrianjost/md2tex
@@ -115,6 +120,7 @@ jobs:
             adrianjost/SmartLight-Homepage
             adrianjost/two-channel-picker
             adrianjost/actions-surge.sh-teardown
+          TARGET_ROOT: /.github/workflows/
   ci-test:
     name: CI-Test
     runs-on: ubuntu-latest
@@ -124,7 +130,9 @@ jobs:
         with:
           COMMIT_MESSAGE: Update Synced CI-Workflow (Test)
           GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
-          FILE_PATTERNS: ^\.github\/workflows\/synced-test\.yml$
+          FILE_PATTERNS: ^synced-test\.yml$
+          SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
             adrianjost/md2tex
             adrianjost/two-channel-picker
+          TARGET_ROOT: /.github/workflows/
