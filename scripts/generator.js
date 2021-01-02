@@ -35,7 +35,7 @@ const syncedRepos = {
 	// "SmartLight-API",
 	"SmartLight-Database-Functions": defaultExluding(["CI-Lint", "CI-Build"]),
 	// "SmartLight-Documentation",
-	// "SmartLight-Firmware",
+	"SmartLight-Firmware": ["Secrets", "GitHub Automation"],
 	// "SmartLight-Google-Home",
 	// "SmartLight-Hardware",
 	// "SmartLight-Homepage",

@@ -23,6 +23,7 @@ jobs:
             ^adrianjost\/fastfeed$
             ^adrianjost\/md2tex$
             ^adrianjost\/SmartLight-Database-Functions$
+            ^adrianjost\/SmartLight-Firmware$
             ^adrianjost\/SmartLight-Web-Client$
             ^adrianjost\/SmartLight-Homepage$
             ^adrianjost\/two-channel-picker$
@@ -53,6 +54,7 @@ jobs:
             adrianjost/fastfeed
             adrianjost/md2tex
             adrianjost/SmartLight-Database-Functions
+            adrianjost/SmartLight-Firmware
             adrianjost/SmartLight-Web-Client
             adrianjost/SmartLight-Homepage
             adrianjost/two-channel-picker
