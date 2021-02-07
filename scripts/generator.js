@@ -41,7 +41,7 @@ const syncedRepos = {
 	// "SmartLight-Homepage",
 	// "SmartLight-Hub",
 	// "SmartLight-V0",
-	"SmartLight-Web-Client": defaultExluding(["CI-Lint"]),
+	"SmartLight-Web-Client": defaultExluding([]),
 	"SmartLight-Homepage": defaultExluding(["CI-Lint"]),
 	"two-channel-picker": [...defaultSyncs, "CI-Test"],
 	"vue-filter-ui": defaultExluding(["CI-Lint", "CI-Build"]),

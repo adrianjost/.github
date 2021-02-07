@@ -30,10 +30,10 @@ jobs:
             ^adrianjost\/vue-filter-ui$
             ^adrianjost\/files-sync-action$
             ^adrianjost\/actions-surge.sh-teardown$
-          GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
+          GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
         env:
-          SYNCED_GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
-          SYNCED_TODO_ACTIONS_MONGO_URL: '${{ secrets.SYNCED_TODO_ACTIONS_MONGO_URL }}'
+          SYNCED_GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
+          SYNCED_TODO_ACTIONS_MONGO_URL: ${{ secrets.SYNCED_TODO_ACTIONS_MONGO_URL }}
   github-automation:
     name: GitHub Automation
     runs-on: ubuntu-latest
@@ -42,7 +42,7 @@ jobs:
       - uses: adrianjost/files-sync-action@master
         with:
           COMMIT_MESSAGE: Update Synced GitHub Automation Workflows
-          GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
+          GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
           FILE_PATTERNS: |-
             ^synced-pr-auto-assign\.yml$
             ^synced-dependabot-pr-recreate\.yml$
@@ -71,7 +71,7 @@ jobs:
       - uses: adrianjost/files-sync-action@master
         with:
           COMMIT_MESSAGE: Update Synced Mergify Config
-          GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
+          GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
           FILE_PATTERNS: ^\.mergify.yml$
           TARGET_REPOS: |-
             adrianjost/Calculator-PWA
@@ -94,12 +94,13 @@ jobs:
       - uses: adrianjost/files-sync-action@master
         with:
           COMMIT_MESSAGE: Update Synced CI-Workflow (Lint)
-          GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
+          GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
           FILE_PATTERNS: ^synced-lint\.yml$
           SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
             adrianjost/Calculator-PWA
             adrianjost/dedent-tabs
+            adrianjost/SmartLight-Web-Client
             adrianjost/two-channel-picker
           TARGET_ROOT: /.github/workflows/
   ci-build:
@@ -110,7 +111,7 @@ jobs:
       - uses: adrianjost/files-sync-action@master
         with:
           COMMIT_MESSAGE: Update Synced CI-Workflow (Build)
-          GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
+          GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
           FILE_PATTERNS: ^synced-build\.yml$
           SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
@@ -129,7 +130,7 @@ jobs:
       - uses: adrianjost/files-sync-action@master
         with:
           COMMIT_MESSAGE: Update Synced CI-Workflow (Test)
-          GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
+          GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
           FILE_PATTERNS: ^synced-test\.yml$
           SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
