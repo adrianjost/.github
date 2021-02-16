@@ -32,7 +32,7 @@ const syncedRepos = {
 	"md2tex": [...defaultExluding(["CI-Lint"]), "CI-Test"],
 	// "PR-Changelog-Generator",
 	// "report-viewer",
-	// "SmartLight-API",
+	"SmartLight-API": defaultExluding(["CI-Lint", "CI-Build"]),
 	"SmartLight-Database-Functions": defaultExluding(["CI-Lint", "CI-Build"]),
 	// "SmartLight-Documentation",
 	"SmartLight-Firmware": ["Secrets", "GitHub Automation"],
