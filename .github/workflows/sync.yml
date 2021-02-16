@@ -68,7 +68,6 @@ jobs:
   mergify:
     name: Mergify
     runs-on: ubuntu-latest
-    needs: github-automation
     steps:
       - uses: adrianjost/files-sync-action@master
         with:
@@ -92,7 +91,6 @@ jobs:
   ci-lint:
     name: CI-Lint
     runs-on: ubuntu-latest
-    needs: mergify
     steps:
       - uses: adrianjost/files-sync-action@master
         with:
@@ -109,7 +107,6 @@ jobs:
   ci-build:
     name: CI-Build
     runs-on: ubuntu-latest
-    needs: ci-lint
     steps:
       - uses: adrianjost/files-sync-action@master
         with:
@@ -128,7 +125,6 @@ jobs:
   ci-test:
     name: CI-Test
     runs-on: ubuntu-latest
-    needs: ci-build
     steps:
       - uses: adrianjost/files-sync-action@master
         with:

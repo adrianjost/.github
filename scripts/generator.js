@@ -112,7 +112,6 @@ json2yaml(".github/workflows/sync.yml", {
 		mergify: {
 			name: "Mergify",
 			"runs-on": "ubuntu-latest",
-			needs: "github-automation",
 			steps: [
 				{
 					uses: "adrianjost/files-sync-action@master",
@@ -132,7 +131,6 @@ json2yaml(".github/workflows/sync.yml", {
 		"ci-lint": {
 			name: "CI-Lint",
 			"runs-on": "ubuntu-latest",
-			needs: "mergify",
 			steps: [
 				{
 					uses: "adrianjost/files-sync-action@master",
@@ -154,7 +152,6 @@ json2yaml(".github/workflows/sync.yml", {
 		"ci-build": {
 			name: "CI-Build",
 			"runs-on": "ubuntu-latest",
-			needs: "ci-lint",
 			steps: [
 				{
 					uses: "adrianjost/files-sync-action@master",
@@ -176,7 +173,6 @@ json2yaml(".github/workflows/sync.yml", {
 		"ci-test": {
 			name: "CI-Test",
 			"runs-on": "ubuntu-latest",
-			needs: "ci-build",
 			steps: [
 				{
 					uses: "adrianjost/files-sync-action@master",
