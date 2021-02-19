@@ -22,7 +22,7 @@ const defaultExluding = (excludes) => defaultSyncs.filter(sync => !excludes.incl
 
 const syncedRepos = {
 	// "actions-surge.sh-teardown",
-	"PWCalculator": defaultExluding(["CI-Build"]),
+	"PWCalculator": defaultSyncs,
 	"Curriculum-Vitae": defaultExluding(["CI-Lint", "CI-Build"]),
 	"dedent-tabs": defaultSyncs,
 	"fastfeed": defaultExluding(["CI-Lint", "CI-Build"]),
@@ -362,6 +362,23 @@ json2yaml(".mergify.yml", {
 	],
 });
 
+const checkoutCacheAndInstall = [
+	{
+		uses: "actions/checkout@v2",
+	},
+	{
+		uses: "actions/cache@v2",
+		with: {
+			path: "~/.npm",
+			key: "${{ runner.os }}-node-${{ hashFiles(''**/package-lock.json'') }}"
+		}
+	},
+	{
+		name: "Install dependencies",
+		run: "npm ci"
+	},
+]
+
 json2yaml("synced-workflows/synced-lint.yml", {
 	name: "CI",
 	on: "push",
@@ -370,13 +387,7 @@ json2yaml("synced-workflows/synced-lint.yml", {
 			name: "Lint",
 			"runs-on": "ubuntu-latest",
 			steps: [
-				{
-					uses: "actions/checkout@v2",
-				},
-				{
-					name: "Install dependencies",
-					run: "npm ci"
-				},
+				...checkoutCacheAndInstall,
 				{
 					name: "Check for Lint Issues",
 					run: "npm run lint:ci"
@@ -394,13 +405,7 @@ json2yaml("synced-workflows/synced-build.yml", {
 			name: "Build",
 			"runs-on": "ubuntu-latest",
 			steps: [
-				{
-					uses: "actions/checkout@v2",
-				},
-				{
-					name: "Install dependencies",
-					run: "npm ci"
-				},
+				...checkoutCacheAndInstall,
 				{
 					name: "Build Project",
 					run: "npm run build"
@@ -418,13 +423,7 @@ json2yaml("synced-workflows/synced-test.yml", {
 			name: "Test",
 			"runs-on": "ubuntu-latest",
 			steps: [
-				{
-					uses: "actions/checkout@v2",
-				},
-				{
-					name: "Install dependencies",
-					run: "npm ci"
-				},
+				...checkoutCacheAndInstall,
 				{
 					name: "Execute Testsuite",
 					run: "npm run test"

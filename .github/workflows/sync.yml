@@ -115,6 +115,7 @@ jobs:
           FILE_PATTERNS: ^synced-build\.yml$
           SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
+            adrianjost/PWCalculator
             adrianjost/dedent-tabs
             adrianjost/md2tex
             adrianjost/SmartLight-Web-Client
