@@ -374,7 +374,7 @@ const checkoutCacheAndInstall = [
 		uses: "actions/cache@v2",
 		with: {
 			path: "~/.npm",
-			key: "${{ runner.os }}-node-${{ hashFiles(''**/package-lock.json'') }}"
+			key: "${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}"
 		}
 	},
 	{
