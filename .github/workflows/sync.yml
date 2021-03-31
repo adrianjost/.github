@@ -31,6 +31,7 @@ jobs:
             ^adrianjost\/vue-filter-ui$
             ^adrianjost\/files-sync-action$
             ^adrianjost\/actions-surge.sh-teardown$
+            ^adrianjost\/bike-computer$
           GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
         env:
           SYNCED_GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
@@ -64,6 +65,7 @@ jobs:
             adrianjost/vue-filter-ui
             adrianjost/files-sync-action
             adrianjost/actions-surge.sh-teardown
+            adrianjost/bike-computer
           TARGET_ROOT: /.github/workflows/
   mergify:
     name: Mergify

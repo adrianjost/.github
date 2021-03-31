@@ -47,6 +47,7 @@ const syncedRepos = {
 	"vue-filter-ui": defaultExluding(["CI-Lint", "CI-Build"]),
 	"files-sync-action": defaultExluding(["CI-Lint", "CI-Build"]),
 	"actions-surge.sh-teardown": defaultExluding(["CI-Lint"]),
+	"bike-computer": ["Secrets", "GitHub Automation"],
 };
 
 const getReposForSync = (syncName) => Object.keys(syncedRepos).filter(reponame => syncedRepos[reponame].includes(syncName))
