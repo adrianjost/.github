@@ -62,7 +62,7 @@ json2yaml(".github/workflows/sync.yml", {
 			},
 		],
 		push: {
-			branches: ["master"],
+			branches: ["master", "main"],
 		},
 	},
 	jobs: {
@@ -224,7 +224,7 @@ json2yaml("synced-workflows/synced-process-todo-comments.yml", {
 	name: "Process TODO comments",
 	on: {
 		push: {
-			branches: ["master"],
+			branches: ["master", "main"],
 		},
 	},
 	jobs: {
