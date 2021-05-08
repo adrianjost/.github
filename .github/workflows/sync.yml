@@ -109,7 +109,6 @@ jobs:
           TARGET_REPOS: |-
             adrianjost/PWCalculator
             adrianjost/dedent-tabs
-            adrianjost/SmartLight-Google-Home
             adrianjost/SmartLight-Web-Client
             adrianjost/two-channel-picker
           TARGET_ROOT: /.github/workflows/
@@ -146,6 +145,5 @@ jobs:
           SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
             adrianjost/md2tex
-            adrianjost/SmartLight-Google-Home
             adrianjost/two-channel-picker
           TARGET_ROOT: /.github/workflows/
