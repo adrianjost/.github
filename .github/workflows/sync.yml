@@ -26,6 +26,7 @@ jobs:
             ^adrianjost\/SmartLight-API$
             ^adrianjost\/SmartLight-Database-Functions$
             ^adrianjost\/SmartLight-Firmware$
+            ^adrianjost\/SmartLight-Google-Home$
             ^adrianjost\/SmartLight-Web-Client$
             ^adrianjost\/SmartLight-Homepage$
             ^adrianjost\/two-channel-picker$
@@ -60,6 +61,7 @@ jobs:
             adrianjost/SmartLight-API
             adrianjost/SmartLight-Database-Functions
             adrianjost/SmartLight-Firmware
+            adrianjost/SmartLight-Google-Home
             adrianjost/SmartLight-Web-Client
             adrianjost/SmartLight-Homepage
             adrianjost/two-channel-picker
@@ -86,6 +88,7 @@ jobs:
             adrianjost/md2tex
             adrianjost/SmartLight-API
             adrianjost/SmartLight-Database-Functions
+            adrianjost/SmartLight-Google-Home
             adrianjost/SmartLight-Web-Client
             adrianjost/SmartLight-Homepage
             adrianjost/two-channel-picker
