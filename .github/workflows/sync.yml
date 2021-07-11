@@ -28,6 +28,7 @@ jobs:
             ^adrianjost\/SmartLight-Firmware$
             ^adrianjost\/SmartLight-Google-Home$
             ^adrianjost\/SmartLight-Web-Client$
+            ^adrianjost\/SmartLight-Hub-Node$
             ^adrianjost\/SmartLight-Homepage$
             ^adrianjost\/two-channel-picker$
             ^adrianjost\/vue-filter-ui$
@@ -63,6 +64,7 @@ jobs:
             adrianjost/SmartLight-Firmware
             adrianjost/SmartLight-Google-Home
             adrianjost/SmartLight-Web-Client
+            adrianjost/SmartLight-Hub-Node
             adrianjost/SmartLight-Homepage
             adrianjost/two-channel-picker
             adrianjost/vue-filter-ui
@@ -90,6 +92,7 @@ jobs:
             adrianjost/SmartLight-Database-Functions
             adrianjost/SmartLight-Google-Home
             adrianjost/SmartLight-Web-Client
+            adrianjost/SmartLight-Hub-Node
             adrianjost/SmartLight-Homepage
             adrianjost/two-channel-picker
             adrianjost/vue-filter-ui
@@ -110,6 +113,7 @@ jobs:
             adrianjost/PWCalculator
             adrianjost/dedent-tabs
             adrianjost/SmartLight-Web-Client
+            adrianjost/SmartLight-Hub-Node
             adrianjost/two-channel-picker
           TARGET_ROOT: /.github/workflows/
   ci-build:
