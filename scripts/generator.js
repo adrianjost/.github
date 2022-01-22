@@ -280,6 +280,14 @@ json2yaml("synced-workflows/synced-dependabot-pr-recreate.yml", {
 });
 
 json2yaml(".mergify.yml", {
+	queue_rules: [
+		{
+			name: "branchProtection",
+			conditions: [
+				"-merged"
+			],
+		},
+	],
 	pull_request_rules: [
 		// ######################
 		// MERGE PRECONDITIONS
@@ -319,9 +327,9 @@ json2yaml(".mergify.yml", {
 			name: "auto merge passing Dependabot pull requests",
 			conditions: ["author~=dependabot(-preview)?\\[bot\\]"],
 			actions: {
-				merge: {
+				queue: {
+					name: "branchProtection",
 					method: "squash",
-					strict: "smart+fasttrack",
 				},
 			},
 		},
@@ -329,9 +337,9 @@ json2yaml(".mergify.yml", {
 			name: "auto merge when ready to merge label is set",
 			conditions: ["label=ready to merge"],
 			actions: {
-				merge: {
+				queue: {
+					name: "branchProtection",
 					method: "merge",
-					strict: "smart+fasttrack",
 				},
 			},
 		},
