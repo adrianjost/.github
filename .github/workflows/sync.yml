@@ -3,7 +3,7 @@
 name: Sync
 'on':
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '0 3 * * 6'
   push:
     branches:
       - master
