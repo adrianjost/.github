@@ -28,6 +28,7 @@ const defaultExluding = (excludes) =>
   defaultSyncs.filter((sync) => !excludes.includes(sync));
 
 const syncedRepos = {
+  doomsday: defaultSyncs,
   PWCalculator: defaultSyncs,
   "Curriculum-Vitae": defaultExluding(["CI-Lint", "CI-Build"]),
   "dedent-tabs": defaultSyncs,
