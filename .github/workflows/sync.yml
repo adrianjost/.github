@@ -15,23 +15,24 @@ jobs:
           SECRETS: |
             ^SYNCED_
           REPOSITORIES: |-
-            ^adrianjost\/PWCalculator$
+            ^adrianjost\/actions-surge.sh-teardown$
+            ^adrianjost\/bike-computer$
             ^adrianjost\/Curriculum-Vitae$
             ^adrianjost\/dedent-tabs$
-            ^adrianjost\/fastfeed$
-            ^adrianjost\/md2tex$
+            ^adrianjost\/files-sync-action$
             ^adrianjost\/SmartLight-API$
             ^adrianjost\/SmartLight-Database-Functions$
             ^adrianjost\/SmartLight-Firmware$
             ^adrianjost\/SmartLight-Google-Home$
-            ^adrianjost\/SmartLight-Web-Client$
-            ^adrianjost\/SmartLight-Hub-Node$
             ^adrianjost\/SmartLight-Homepage$
+            ^adrianjost\/SmartLight-Hub-Node$
+            ^adrianjost\/SmartLight-Web-Client$
             ^adrianjost\/two-channel-picker$
             ^adrianjost\/vue-filter-ui$
-            ^adrianjost\/files-sync-action$
-            ^adrianjost\/actions-surge.sh-teardown$
-            ^adrianjost\/bike-computer$
+            ^adrianjost\/doomsday$
+            ^adrianjost\/fastfeed$
+            ^adrianjost\/md2tex$
+            ^adrianjost\/PWCalculator$
           GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
         env:
           SYNCED_GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
@@ -51,23 +52,24 @@ jobs:
             ^synced-process-todo-comments\.yml$
           SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
-            adrianjost/PWCalculator
+            adrianjost/actions-surge.sh-teardown
+            adrianjost/bike-computer
             adrianjost/Curriculum-Vitae
             adrianjost/dedent-tabs
-            adrianjost/fastfeed
-            adrianjost/md2tex
+            adrianjost/files-sync-action
             adrianjost/SmartLight-API
             adrianjost/SmartLight-Database-Functions
             adrianjost/SmartLight-Firmware
             adrianjost/SmartLight-Google-Home
-            adrianjost/SmartLight-Web-Client
-            adrianjost/SmartLight-Hub-Node
             adrianjost/SmartLight-Homepage
+            adrianjost/SmartLight-Hub-Node
+            adrianjost/SmartLight-Web-Client
             adrianjost/two-channel-picker
             adrianjost/vue-filter-ui
-            adrianjost/files-sync-action
-            adrianjost/actions-surge.sh-teardown
-            adrianjost/bike-computer
+            adrianjost/doomsday
+            adrianjost/fastfeed
+            adrianjost/md2tex
+            adrianjost/PWCalculator
           TARGET_ROOT: /.github/workflows/
   mergify:
     name: Mergify
@@ -80,21 +82,22 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
           FILE_PATTERNS: ^\.mergify.yml$
           TARGET_REPOS: |-
-            adrianjost/PWCalculator
+            adrianjost/actions-surge.sh-teardown
             adrianjost/Curriculum-Vitae
             adrianjost/dedent-tabs
-            adrianjost/fastfeed
-            adrianjost/md2tex
+            adrianjost/files-sync-action
             adrianjost/SmartLight-API
             adrianjost/SmartLight-Database-Functions
             adrianjost/SmartLight-Google-Home
-            adrianjost/SmartLight-Web-Client
-            adrianjost/SmartLight-Hub-Node
             adrianjost/SmartLight-Homepage
+            adrianjost/SmartLight-Hub-Node
+            adrianjost/SmartLight-Web-Client
             adrianjost/two-channel-picker
             adrianjost/vue-filter-ui
-            adrianjost/files-sync-action
-            adrianjost/actions-surge.sh-teardown
+            adrianjost/doomsday
+            adrianjost/fastfeed
+            adrianjost/md2tex
+            adrianjost/PWCalculator
   ci-lint:
     name: CI-Lint
     runs-on: ubuntu-latest
@@ -107,11 +110,12 @@ jobs:
           FILE_PATTERNS: ^synced-lint\.yml$
           SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
-            adrianjost/PWCalculator
             adrianjost/dedent-tabs
-            adrianjost/SmartLight-Web-Client
             adrianjost/SmartLight-Hub-Node
+            adrianjost/SmartLight-Web-Client
             adrianjost/two-channel-picker
+            adrianjost/doomsday
+            adrianjost/PWCalculator
           TARGET_ROOT: /.github/workflows/
   ci-build:
     name: CI-Build
@@ -125,13 +129,14 @@ jobs:
           FILE_PATTERNS: ^synced-build\.yml$
           SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
-            adrianjost/PWCalculator
-            adrianjost/dedent-tabs
-            adrianjost/md2tex
-            adrianjost/SmartLight-Web-Client
-            adrianjost/SmartLight-Homepage
-            adrianjost/two-channel-picker
             adrianjost/actions-surge.sh-teardown
+            adrianjost/dedent-tabs
+            adrianjost/SmartLight-Homepage
+            adrianjost/SmartLight-Web-Client
+            adrianjost/two-channel-picker
+            adrianjost/doomsday
+            adrianjost/md2tex
+            adrianjost/PWCalculator
           TARGET_ROOT: /.github/workflows/
   ci-test:
     name: CI-Test
@@ -145,6 +150,6 @@ jobs:
           FILE_PATTERNS: ^synced-test\.yml$
           SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
-            adrianjost/md2tex
             adrianjost/two-channel-picker
+            adrianjost/md2tex
           TARGET_ROOT: /.github/workflows/

@@ -17,35 +17,35 @@ const json2yaml = (filename, workflow) => {
 };
 
 const defaultSyncs = [
-  "Secrets",
-  "Mergify",
-  "GitHub Automation",
-  "CI-Lint",
   "CI-Build",
+  "CI-Lint",
+  "GitHub Automation",
+  "Mergify",
+  "Secrets",
 ];
 
 const defaultExluding = (excludes) =>
   defaultSyncs.filter((sync) => !excludes.includes(sync));
 
 const syncedRepos = {
-  doomsday: defaultSyncs,
-  PWCalculator: defaultSyncs,
+  "actions-surge.sh-teardown": defaultExluding(["CI-Lint"]),
+  "bike-computer": ["Secrets", "GitHub Automation"],
   "Curriculum-Vitae": defaultExluding(["CI-Lint", "CI-Build"]),
   "dedent-tabs": defaultSyncs,
-  fastfeed: defaultExluding(["CI-Lint", "CI-Build"]),
-  md2tex: [...defaultExluding(["CI-Lint"]), "CI-Test"],
+  "files-sync-action": defaultExluding(["CI-Lint", "CI-Build"]),
   "SmartLight-API": defaultExluding(["CI-Lint", "CI-Build"]),
   "SmartLight-Database-Functions": defaultExluding(["CI-Lint", "CI-Build"]),
   "SmartLight-Firmware": ["Secrets", "GitHub Automation"],
   "SmartLight-Google-Home": defaultExluding(["CI-Lint", "CI-Build"]),
-  "SmartLight-Web-Client": defaultExluding([]),
-  "SmartLight-Hub-Node": defaultExluding(["CI-Build"]),
   "SmartLight-Homepage": defaultExluding(["CI-Lint"]),
+  "SmartLight-Hub-Node": defaultExluding(["CI-Build"]),
+  "SmartLight-Web-Client": defaultExluding([]),
   "two-channel-picker": [...defaultSyncs, "CI-Test"],
   "vue-filter-ui": defaultExluding(["CI-Lint", "CI-Build"]),
-  "files-sync-action": defaultExluding(["CI-Lint", "CI-Build"]),
-  "actions-surge.sh-teardown": defaultExluding(["CI-Lint"]),
-  "bike-computer": ["Secrets", "GitHub Automation"],
+  doomsday: defaultSyncs,
+  fastfeed: defaultExluding(["CI-Lint", "CI-Build"]),
+  md2tex: [...defaultExluding(["CI-Lint"]), "CI-Test"],
+  PWCalculator: defaultSyncs,
 };
 
 const getReposForSync = (syncName) =>
