@@ -61,7 +61,7 @@ json2yaml(".github/workflows/sync.yml", {
     //   },
     // ],
     push: {
-      branches: ["master", "main"],
+      branches: ["main"],
     },
   },
   jobs: {
