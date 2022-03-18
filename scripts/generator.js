@@ -55,11 +55,11 @@ const getReposForSync = (syncName) =>
 json2yaml(".github/workflows/sync.yml", {
   name: "Sync",
   on: {
-    schedule: [
-      {
-        cron: "0 3 * * *",
-      },
-    ],
+    // schedule: [
+    //   {
+    //     cron: "0 3 * * *",
+    //   },
+    // ],
     push: {
       branches: ["master", "main"],
     },

@@ -2,8 +2,6 @@
 # remove repo from adrianjost/.github/synced/workflows/generator.js before editing
 name: Sync
 'on':
-  # schedule:
-  #   - cron: '0 3 * * 6'
   push:
     branches:
       - master
