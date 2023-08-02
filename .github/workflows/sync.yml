@@ -18,7 +18,6 @@ jobs:
             ^adrianjost\/actions-surge.sh-teardown$
             ^adrianjost\/bike-computer$
             ^adrianjost\/Curriculum-Vitae$
-            ^adrianjost\/dedent-tabs$
             ^adrianjost\/files-sync-action$
             ^adrianjost\/SmartLight-API$
             ^adrianjost\/SmartLight-Database-Functions$
@@ -55,7 +54,6 @@ jobs:
             adrianjost/actions-surge.sh-teardown
             adrianjost/bike-computer
             adrianjost/Curriculum-Vitae
-            adrianjost/dedent-tabs
             adrianjost/files-sync-action
             adrianjost/SmartLight-API
             adrianjost/SmartLight-Database-Functions
@@ -84,7 +82,6 @@ jobs:
           TARGET_REPOS: |-
             adrianjost/actions-surge.sh-teardown
             adrianjost/Curriculum-Vitae
-            adrianjost/dedent-tabs
             adrianjost/files-sync-action
             adrianjost/SmartLight-API
             adrianjost/SmartLight-Database-Functions
@@ -110,7 +107,6 @@ jobs:
           FILE_PATTERNS: ^synced-lint\.yml$
           SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
-            adrianjost/dedent-tabs
             adrianjost/SmartLight-Hub-Node
             adrianjost/SmartLight-Web-Client
             adrianjost/two-channel-picker
@@ -130,7 +126,6 @@ jobs:
           SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
             adrianjost/actions-surge.sh-teardown
-            adrianjost/dedent-tabs
             adrianjost/SmartLight-Homepage
             adrianjost/SmartLight-Web-Client
             adrianjost/two-channel-picker

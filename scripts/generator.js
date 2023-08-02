@@ -31,7 +31,6 @@ const syncedRepos = {
   "actions-surge.sh-teardown": defaultExluding(["CI-Lint"]),
   "bike-computer": ["Secrets", "GitHub Automation"],
   "Curriculum-Vitae": defaultExluding(["CI-Lint", "CI-Build"]),
-  "dedent-tabs": defaultSyncs,
   "files-sync-action": defaultExluding(["CI-Lint", "CI-Build"]),
   "SmartLight-API": defaultExluding(["CI-Lint", "CI-Build"]),
   "SmartLight-Database-Functions": defaultExluding(["CI-Lint", "CI-Build"]),
