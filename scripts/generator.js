@@ -71,7 +71,7 @@ json2yaml(".github/workflows/sync.yml", {
       "runs-on": "ubuntu-latest",
       steps: [
         {
-          uses: "jpoehnelt/secrets-sync-action@v1.1.3",
+          uses: "jpoehnelt/secrets-sync-action@v1.7.2",
           with: {
             SECRETS: "^SYNCED_\n",
             REPOSITORIES: getReposForSync("Secrets")
@@ -93,7 +93,7 @@ json2yaml(".github/workflows/sync.yml", {
       needs: "secrets",
       steps: [
         {
-          uses: "adrianjost/files-sync-action@master",
+          uses: "adrianjost/files-sync-action@v2.0.3",
           with: {
             COMMIT_MESSAGE: "Update Synced GitHub Automation Workflows",
             GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
