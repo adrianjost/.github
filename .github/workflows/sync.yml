@@ -32,6 +32,8 @@ jobs:
             ^adrianjost\/fastfeed$
             ^adrianjost\/md2tex$
             ^adrianjost\/PWCalculator$
+            ^adrianjost\/image-store$
+            ^adrianjost\/random-notes$
           GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
         env:
           SYNCED_GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
@@ -68,6 +70,8 @@ jobs:
             adrianjost/fastfeed
             adrianjost/md2tex
             adrianjost/PWCalculator
+            adrianjost/image-store
+            adrianjost/random-notes
           TARGET_ROOT: /.github/workflows/
   mergify:
     name: Mergify
@@ -95,6 +99,8 @@ jobs:
             adrianjost/fastfeed
             adrianjost/md2tex
             adrianjost/PWCalculator
+            adrianjost/image-store
+            adrianjost/random-notes
   ci-lint:
     name: CI-Lint
     runs-on: ubuntu-latest
@@ -132,6 +138,7 @@ jobs:
             adrianjost/doomsday
             adrianjost/md2tex
             adrianjost/PWCalculator
+            adrianjost/random-notes
           TARGET_ROOT: /.github/workflows/
   ci-test:
     name: CI-Test

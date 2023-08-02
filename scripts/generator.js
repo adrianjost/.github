@@ -45,6 +45,8 @@ const syncedRepos = {
   fastfeed: defaultExluding(["CI-Lint", "CI-Build"]),
   md2tex: [...defaultExluding(["CI-Lint"]), "CI-Test"],
   PWCalculator: defaultSyncs,
+  "image-store": defaultExluding(["CI-Lint", "CI-Build"]),
+  "random-notes": defaultExluding(["CI-Lint"]),
 };
 
 const getReposForSync = (syncName) =>
