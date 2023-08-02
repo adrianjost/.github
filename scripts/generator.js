@@ -62,7 +62,7 @@ json2yaml(".github/workflows/sync.yml", {
     //   },
     // ],
     push: {
-      branches: ["main"],
+      branches: ["main", "test"],
     },
   },
   jobs: {
@@ -117,7 +117,7 @@ json2yaml(".github/workflows/sync.yml", {
       needs: "github-automation",
       steps: [
         {
-          uses: "adrianjost/files-sync-action@master",
+          uses: "adrianjost/files-sync-action@simplify",
           with: {
             COMMIT_MESSAGE: "Update Synced Mergify Config",
             GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
@@ -226,7 +226,7 @@ json2yaml("synced-workflows/synced-process-todo-comments.yml", {
       "runs-on": "ubuntu-latest",
       steps: [
         {
-          uses: "actions/checkout@v2",
+          uses: "actions/checkout@v3",
           with: {
             token: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
           },
