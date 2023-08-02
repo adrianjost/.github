@@ -71,7 +71,7 @@ json2yaml(".github/workflows/sync.yml", {
       "runs-on": "ubuntu-latest",
       steps: [
         {
-          uses: "google/secrets-sync-action@v1.1.3",
+          uses: "jpoehnelt/secrets-sync-action@v1.1.3",
           with: {
             SECRETS: "^SYNCED_\n",
             REPOSITORIES: getReposForSync("Secrets")
