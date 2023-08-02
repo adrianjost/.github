@@ -93,7 +93,7 @@ json2yaml(".github/workflows/sync.yml", {
       needs: "secrets",
       steps: [
         {
-          uses: "adrianjost/files-sync-action@v2.0.0",
+          uses: "adrianjost/files-sync-action@master",
           with: {
             COMMIT_MESSAGE: "Update Synced GitHub Automation Workflows",
             GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
@@ -226,7 +226,7 @@ json2yaml("synced-workflows/synced-process-todo-comments.yml", {
       "runs-on": "ubuntu-latest",
       steps: [
         {
-          uses: "actions/checkout@v2",
+          uses: "actions/checkout@v3",
           with: {
             token: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
           },
@@ -271,7 +271,7 @@ json2yaml("synced-workflows/synced-dependabot-pr-recreate.yml", {
         {
           name: "tell dependabot to recreate pr",
           if: "steps.prcomm.outputs.BOOL_TRIGGERED == 'true'",
-          uses: "peter-evans/create-or-update-comment@v1",
+          uses: "peter-evans/create-or-update-comment@v3",
           with: {
             token: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
             "issue-number": "${{ steps.prcomm.outputs.PULL_REQUEST_NUMBER }}",
@@ -369,10 +369,10 @@ json2yaml(".mergify.yml", {
 
 const checkoutCacheAndInstall = [
   {
-    uses: "actions/checkout@v2",
+    uses: "actions/checkout@v3",
   },
   {
-    uses: "actions/cache@v2",
+    uses: "actions/cache@v3",
     with: {
       path: "~/.npm",
       key: "${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}",
