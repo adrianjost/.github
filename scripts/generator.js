@@ -93,7 +93,7 @@ json2yaml(".github/workflows/sync.yml", {
       needs: "secrets",
       steps: [
         {
-          uses: "adrianjost/files-sync-action@v2.0.3",
+          uses: "adrianjost/files-sync-action@v2.0.0",
           with: {
             COMMIT_MESSAGE: "Update Synced GitHub Automation Workflows",
             GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
