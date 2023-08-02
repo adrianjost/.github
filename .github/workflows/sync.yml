@@ -16,7 +16,6 @@ jobs:
             ^SYNCED_
           REPOSITORIES: |-
             ^adrianjost\/actions-surge.sh-teardown$
-            ^adrianjost\/bike-computer$
             ^adrianjost\/Curriculum-Vitae$
             ^adrianjost\/files-sync-action$
             ^adrianjost\/SmartLight-API$
@@ -54,7 +53,6 @@ jobs:
           SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
             adrianjost/actions-surge.sh-teardown
-            adrianjost/bike-computer
             adrianjost/Curriculum-Vitae
             adrianjost/files-sync-action
             adrianjost/SmartLight-API
