@@ -21,7 +21,6 @@ jobs:
             ^adrianjost\/two-channel-picker$
             ^adrianjost\/vue-filter-ui$
             ^adrianjost\/doomsday$
-            ^adrianjost\/fastfeed$
             ^adrianjost\/md2tex$
             ^adrianjost\/PWCalculator$
             ^adrianjost\/image-store$
@@ -51,7 +50,6 @@ jobs:
             adrianjost/two-channel-picker
             adrianjost/vue-filter-ui
             adrianjost/doomsday
-            adrianjost/fastfeed
             adrianjost/md2tex
             adrianjost/PWCalculator
             adrianjost/image-store
@@ -74,7 +72,6 @@ jobs:
             adrianjost/two-channel-picker
             adrianjost/vue-filter-ui
             adrianjost/doomsday
-            adrianjost/fastfeed
             adrianjost/md2tex
             adrianjost/PWCalculator
             adrianjost/image-store

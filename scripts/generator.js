@@ -34,7 +34,6 @@ const syncedRepos = {
   "two-channel-picker": [...defaultSyncs, "CI-Test"],
   "vue-filter-ui": defaultExluding(["CI-Lint", "CI-Build"]),
   doomsday: defaultSyncs,
-  fastfeed: defaultExluding(["CI-Lint", "CI-Build"]),
   md2tex: [...defaultExluding(["CI-Lint"]), "CI-Test"],
   PWCalculator: defaultSyncs,
   "image-store": defaultExluding(["CI-Lint", "CI-Build"]),
