@@ -92,7 +92,7 @@ json2yaml(".github/workflows/sync.yml", {
             FILE_PATTERNS: [
               `^synced-pr-auto-assign\\.yml$`,
               `^synced-dependabot-pr-recreate\\.yml$`,
-              `^synced-process-todo-comments\\.yml$`,
+              // `^synced-process-todo-comments\\.yml$`,
             ].join("\n"),
             SRC_ROOT: "/synced-workflows/",
             TARGET_REPOS: getReposForSync("GitHub Automation")

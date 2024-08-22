@@ -41,7 +41,6 @@ jobs:
           FILE_PATTERNS: |-
             ^synced-pr-auto-assign\.yml$
             ^synced-dependabot-pr-recreate\.yml$
-            ^synced-process-todo-comments\.yml$
           SRC_ROOT: /synced-workflows/
           TARGET_REPOS: |-
             adrianjost/actions-surge.sh-teardown
