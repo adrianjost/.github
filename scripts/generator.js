@@ -263,7 +263,7 @@ json2yaml("synced-workflows/synced-dependabot-pr-recreate.yml", {
         {
           name: "tell dependabot to recreate pr",
           if: "steps.prcomm.outputs.BOOL_TRIGGERED == 'true'",
-          uses: "peter-evans/create-or-update-comment@v3",
+          uses: "peter-evans/create-or-update-comment@v4",
           with: {
             token: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
             "issue-number": "${{ steps.prcomm.outputs.PULL_REQUEST_NUMBER }}",
