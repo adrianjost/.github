@@ -25,6 +25,7 @@ jobs:
             ^adrianjost\/PWCalculator$
             ^adrianjost\/image-store$
             ^adrianjost\/random-notes$
+            ^adrianjost\/fastfeed$
           GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
         env:
           SYNCED_GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
@@ -53,6 +54,7 @@ jobs:
             adrianjost/PWCalculator
             adrianjost/image-store
             adrianjost/random-notes
+            adrianjost/fastfeed
           TARGET_ROOT: /.github/workflows/
   mergify:
     name: Mergify
@@ -75,6 +77,7 @@ jobs:
             adrianjost/PWCalculator
             adrianjost/image-store
             adrianjost/random-notes
+            adrianjost/fastfeed
   ci-lint:
     name: CI-Lint
     runs-on: ubuntu-latest

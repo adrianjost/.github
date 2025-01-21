@@ -38,6 +38,7 @@ const syncedRepos = {
   PWCalculator: defaultSyncs,
   "image-store": defaultExluding(["CI-Lint", "CI-Build"]),
   "random-notes": defaultExluding(["CI-Lint"]),
+  "fastfeed": defaultExluding(["CI-Lint", "CI-Build"]),
 };
 
 const getReposForSync = (syncName) =>
