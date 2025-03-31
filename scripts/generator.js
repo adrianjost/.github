@@ -353,6 +353,15 @@ json2yaml(".mergify.yml", {
       },
     },
   ],
+  priority_rules: [
+    {
+      name: "priority for queue `auto merge when ready to merge label is set`",
+      conditions: [
+        "label=ready to merge"
+      ],
+      priority: 2250
+    }
+  ]
 });
 
 const checkoutCacheAndInstall = [
