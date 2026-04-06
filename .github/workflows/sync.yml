@@ -29,7 +29,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
         env:
           SYNCED_GITHUB_TOKEN: ${{ secrets.SYNCED_GITHUB_TOKEN }}
-          SYNCED_TODO_ACTIONS_MONGO_URL: ${{ secrets.SYNCED_TODO_ACTIONS_MONGO_URL }}
   github-automation:
     name: GitHub Automation
     runs-on: ubuntu-latest

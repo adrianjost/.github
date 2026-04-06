@@ -12,7 +12,7 @@ const json2yaml = (filename, workflow) => {
           lineWidth: -1,
           noRefs: true,
         })
-        .replace(/(((\*|\?|\d+((\/|\-){0,1}(\d+))*) *){5})/, `'$1'`)
+        .replace(/(((\*|\?|\d+((\/|\-){0,1}(\d+))*) *){5})/, `'$1'`),
   );
 };
 
@@ -38,12 +38,12 @@ const syncedRepos = {
   PWCalculator: defaultSyncs,
   "image-store": defaultExluding(["CI-Lint", "CI-Build"]),
   "random-notes": defaultExluding(["CI-Lint"]),
-  "fastfeed": defaultExluding(["CI-Lint", "CI-Build"]),
+  fastfeed: defaultExluding(["CI-Lint", "CI-Build"]),
 };
 
 const getReposForSync = (syncName) =>
   Object.keys(syncedRepos).filter((reponame) =>
-    syncedRepos[reponame].includes(syncName)
+    syncedRepos[reponame].includes(syncName),
   );
 
 json2yaml(".github/workflows/sync.yml", {
@@ -74,8 +74,8 @@ json2yaml(".github/workflows/sync.yml", {
           },
           env: {
             SYNCED_GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
-            SYNCED_TODO_ACTIONS_MONGO_URL:
-              "${{ secrets.SYNCED_TODO_ACTIONS_MONGO_URL }}",
+            // SYNCED_TODO_ACTIONS_MONGO_URL:
+            //   "${{ secrets.SYNCED_TODO_ACTIONS_MONGO_URL }}",
           },
         },
       ],
@@ -206,37 +206,37 @@ json2yaml("synced-workflows/synced-pr-auto-assign.yml", {
   },
 });
 
-json2yaml("synced-workflows/synced-process-todo-comments.yml", {
-  name: "Process TODO comments",
-  on: {
-    push: {
-      branches: ["master", "main"],
-    },
-  },
-  jobs: {
-    collectTODO: {
-      name: "Collect TODO",
-      "runs-on": "ubuntu-latest",
-      steps: [
-        {
-          uses: "actions/checkout@v3",
-          with: {
-            token: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
-          },
-        },
-        {
-          name: "Collect TODO",
-          uses: "dtinth/todo-actions@master",
-          env: {
-            GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
-            TODO_ACTIONS_MONGO_URL:
-              "${{ secrets.SYNCED_TODO_ACTIONS_MONGO_URL }}",
-          },
-        },
-      ],
-    },
-  },
-});
+// json2yaml("synced-workflows/synced-process-todo-comments.yml", {
+//   name: "Process TODO comments",
+//   on: {
+//     push: {
+//       branches: ["master", "main"],
+//     },
+//   },
+//   jobs: {
+//     collectTODO: {
+//       name: "Collect TODO",
+//       "runs-on": "ubuntu-latest",
+//       steps: [
+//         {
+//           uses: "actions/checkout@v3",
+//           with: {
+//             token: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
+//           },
+//         },
+//         {
+//           name: "Collect TODO",
+//           uses: "dtinth/todo-actions@master",
+//           env: {
+//             GITHUB_TOKEN: "${{ secrets.SYNCED_GITHUB_TOKEN }}",
+//             TODO_ACTIONS_MONGO_URL:
+//               "${{ secrets.SYNCED_TODO_ACTIONS_MONGO_URL }}",
+//           },
+//         },
+//       ],
+//     },
+//   },
+// });
 
 json2yaml("synced-workflows/synced-dependabot-pr-recreate.yml", {
   name: "PR Automation",
@@ -288,7 +288,7 @@ json2yaml(".mergify.yml", {
       name: "branchProtection",
       queue_conditions: ["author~=dependabot(-preview)?\\[bot\\]"],
       merge_conditions: ["-merged"],
-      merge_method: "squash"
+      merge_method: "squash",
     },
   ],
   pull_request_rules: [
@@ -356,12 +356,10 @@ json2yaml(".mergify.yml", {
   priority_rules: [
     {
       name: "priority for queue `auto merge when ready to merge label is set`",
-      conditions: [
-        "label=ready to merge"
-      ],
-      priority: 2250
-    }
-  ]
+      conditions: ["label=ready to merge"],
+      priority: 2250,
+    },
+  ],
 });
 
 const checkoutCacheAndInstall = [
