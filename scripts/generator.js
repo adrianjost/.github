@@ -345,19 +345,13 @@ json2yaml(".mergify.yml", {
         },
       },
     },
-    {
-      name: "delete merged branches",
-      conditions: ["merged", "label!=WIP"],
-      actions: {
-        delete_head_branch: {},
-      },
-    },
   ],
   priority_rules: [
     {
-      name: "priority for queue `auto merge when ready to merge label is set`",
+      name: "priority for queue `auto merge` when label is set",
       conditions: ["label=ready to merge"],
       priority: 2250,
+      allow_checks_interruption: true,
     },
   ],
 });
