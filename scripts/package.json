@@ -7,7 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "fs-extra": "^11.3.6",
-    "js-yaml": "^5.2.0"
+    "js-yaml": "^5.2.1"
   },
   "scripts": {
     "start": "node ./generator.js"
