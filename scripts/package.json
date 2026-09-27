@@ -6,7 +6,7 @@
   "author": "adrianjost",
   "license": "MIT",
   "dependencies": {
-    "fs-extra": "^11.4.0",
+    "fs-extra": "^11.4.1",
     "js-yaml": "^5.4.2"
   },
   "scripts": {
